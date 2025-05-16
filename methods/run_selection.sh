@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# usage: bash methods/run_selection.sh configs/gradsim_pretrain.yaml
+# usage: bash methods/run_selection.sh configs/pretrain_gradsim.yaml
 
 # Check if config path is provided
 if [ -z "$1" ]; then

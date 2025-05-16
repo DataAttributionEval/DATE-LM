@@ -1,28 +1,28 @@
-base_dir: /data/group_data/cx_group/
+base_dir: /data/group_data/cx_group/ 
 
 # data preprocessing
 # input:
 train_dataset_name: fineweb
 train_data_split: 0
-reference_dataset_name: lambada_openai
+reference_dataset_name: lambada
 # output:
 train_data_dir: /data/group_data/cx_group/data/fineweb/train/0
 val_data_dir: /data/group_data/cx_group/data/fineweb/val/0
-reference_data_dir: /data/group_data/cx_group/data/lambada_openai/train/train-1024.pt
+reference_data_dir: /data/group_data/cx_group/data/lambada_openai/train-1024.pt
 
 ## data selection
 # input:
 # train_data_dir
-method: random
+method: gradsim
 select_from_size: 1024000
 selection_size: 102400
+metrics_dir: /data/group_data/cx_group/out/pythia-1b/fineweb/sample-350BT/random/step-00010000/less_full
 # output:
-selected_train_data_dir: /data/group_data/cx_group/data/fineweb/train/0/random
+selected_train_data_dir: /data/group_data/cx_group/data/fineweb/train/0/gradsim_lambada_pythia1b_step10000
 
 ## training
 # input:
 # selected_train_data_dir
 model_class: pythia
 train_config: configs/train_pretrain_decay_pythia-1b.yaml
-resume: /data/group_data/cx_group/out/pythia-1b/fineweb/sample-350BT/random/step-00010000/lit_model.pth
-out_dir: your_output_dir/
+

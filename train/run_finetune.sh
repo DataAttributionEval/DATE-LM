@@ -6,36 +6,26 @@
 #SBATCH --error=logs/finetune_%j.err
 #SBATCH --time=1-00:00:00
 #SBATCH --mem=50GB
-#SBATCH --mail-type=BEGIN,END,FAIL  # Send email at job start, end, and failure
-#SBATCH --mail-user=emilyx@andrew.cmu.edu  # Replace with your email address
 
 
 # usage :
-# (mmft) [@babel-15-20 data-attribution-evaluation]$ bash train/run_finetune.sh configs/finetune_llama3-8b-tulu3.yaml # configs/finetune_llama2-7b-tulu2.yaml
+# [data-attribution-evaluation]$ bash train/run_finetune.sh configs/finetune_llama3-8b-tulu3.yaml # configs/finetune_llama2-7b-tulu2.yaml
 set -ex
 
 export NCCL_P2P_DISABLE=1
 
 CONFIG_FILE=$1
-echo $CONFIG_FILE
 
-finetune_config=$(yq .train_config "$CONFIG_FILE" | tr -d '"')
+train_config=$(yq .train_config "$CONFIG_FILE" | tr -d '"')
 train_data_path=$(yq .train_data_path "$CONFIG_FILE" | tr -d '"')
 out_dir=$(yq .out_dir "$CONFIG_FILE" | tr -d '"')
 checkpoint_dir=$(yq .checkpoint_dir "$CONFIG_FILE" | tr -d '"')
 
-echo "Finetune Config: $finetune_config"
-echo "Output Directory: $out_dir"
-
 # run training
 python train/finetune.py \
-  --config $finetune_config \
+  --config $train_config \
   --train_data_path $train_data_path \
   --out_dir $out_dir
-
-echo "tasks: $tasks"
-echo "starting ckpt: $checkpoint_dir"
-echo "final ckpt: $out_dir/final"
 
 python evaluation/convert.py $out_dir/final # convert ckpt to huggingface
 

@@ -87,7 +87,7 @@ def setup(
 
     model, tokenizer = checkpoints_load_func( # pad token is [PAD]
         None,
-        lora_ckpt,#"/data/user_data/emilyx/results",
+        lora_ckpt,
         base_model_name#"meta-llama/Llama-3.1-8B"
     )
     # model = model.to(device)

@@ -8,8 +8,6 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=100G
 #SBATCH --time=2-00:00:00
-#SBATCH --mail-type=BEGIN,END,FAIL
-#SBATCH --mail-user=emilyx@andrew.cmu.edu
 #SBATCH --requeue
 
 # Description: Runs probe_gradient_similarity.py for 16 shards using SLURM array jobs.

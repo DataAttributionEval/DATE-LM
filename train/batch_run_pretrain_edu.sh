@@ -7,8 +7,6 @@
 #SBATCH --cpus-per-task=16
 #SBATCH --time=2-00:00:00
 #SBATCH --mem=100G
-#SBATCH --mail-type=BEGIN,END,FAIL  # Send email at job start, end, and failure
-#SBATCH --mail-user=hanzhanz@andrew.cmu.edu  # Replace with your email address
 
 # Usage: sbatch train/batch_run_pretrain_edu.sh
 

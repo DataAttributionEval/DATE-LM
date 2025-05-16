@@ -8,8 +8,6 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=50G
 #SBATCH --time=1-00:00:00
-#SBATCH --mail-type=BEGIN,END,FAIL
-#SBATCH --mail-user=emilyx@andrew.cmu.edu
 
 # Description: Runs predict_data_influence.py for 8 shards using SLURM array jobs.
 # Usage:

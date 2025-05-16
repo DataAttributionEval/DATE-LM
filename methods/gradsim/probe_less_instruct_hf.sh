@@ -9,8 +9,6 @@
 #SBATCH --time=1-00:00:00
 #SBATCH --mem=50G
 #SBATCH --exclude=babel-13-13,babel-2-13,babel-13-1,babel-4-13
-#SBATCH --mail-type=BEGIN,END,FAIL  # Send email at job start, end, and failure
-#SBATCH --mail-user=emilyx@andrew.cmu.edu  # Replace with your email address
 #SBATCH --array=0-2  # Array job for 3 tasks
 
 # Usage

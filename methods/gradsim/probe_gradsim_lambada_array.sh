@@ -8,8 +8,6 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=100G
 #SBATCH --time=2-00:00:00
-#SBATCH --mail-type=BEGIN,END,FAIL
-#SBATCH --mail-user=emilyx@andrew.cmu.edu
 #SBATCH --requeue
 
 # Description: Runs probe_gradient_similarity.py for 16 shards using SLURM array jobs.
@@ -30,7 +28,7 @@ echo "Processing shard $RANK"
 CUDA_VISIBLE_DEVICES=0 PYTHONUNBUFFERED=1 python methods/gradsim/probe_gradient_similarity.py \
     --model_name pythia-1b \
     --train_data_dir /data/group_data/cx_group/data/fineweb/train/0 \
-    --reference_data_dir /data/user_data/emilyx/lambada_openai/train-1024.pt  \
+    --reference_data_dir /data/group_data/cx_group/data/lambada_openai/train-1024.pt  \
     --reference_data_size 1024 \
     --resume /data/group_data/cx_group/out/pythia-1b/fineweb/sample-350BT/random/${STEP}/lit_model.pth \
     --out_dir /data/group_data/cx_group/out/pythia-1b/fineweb/sample-350BT/random/${STEP}/gradsim_lambada_preempt \

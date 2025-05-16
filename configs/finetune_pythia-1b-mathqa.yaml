@@ -1,0 +1,41 @@
+base_dir: /data/group_data/cx_group/ 
+
+# data preprocessing
+# input:
+train_dataset_name: mathqa
+train_data_split: 0
+reference_dataset_name: mathqa-valid
+
+# output:
+train_data_dir: /data/group_data/cx_group/data/mathqa
+val_data_dir: /data/group_data/cx_group/data/mathqa
+reference_data_dir: /data/group_data/cx_group/data/mathqa
+
+## data selection
+# input:
+# train_data_dir
+method: random
+select_from_size: 29837
+selection_size: 7500
+
+# output:
+selected_train_data_dir: /data/group_data/cx_group/data/mathqa/random
+
+## training
+# input:
+# selected_train_data_dir
+model_class: pythia
+train_config: configs/train_finetune_pythia-1b.yaml
+# train_data_path: /data/user_data/hanzhanz/finetune/mathqa/selected/selected_data.json
+train_data_path: /data/group_data/cx_group/data/mathqa/mathqa.json
+validation_data_path:  /data/group_data/cx_group/data/mathqa/mathqa-valid.json
+# out_dir: /data/group_data/cx_group/date-models
+out_dir: /data/user_data/emilyx/finetune/test
+exp_name: test
+
+# evaluate
+eval_tasks: mathqa
+# checkpoint: step-001175
+checkpoint: final
+num_fewshot: 0
+batch_size: 16

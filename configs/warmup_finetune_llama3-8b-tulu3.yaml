@@ -1,0 +1,20 @@
+
+# data preprocessing
+# input:
+train_dataset_name: tulu3
+
+## data selection
+# input:
+# train_data_dir
+method: random
+select_from_size: 200000
+selection_size: 10000
+
+## training
+# input:
+# selected_train_data_dir
+train_config: "configs/train_finetune_llama3-8b.yaml"
+train_data_path: /data/hf_cache/datasets/lsds_data/data/training_data/training_data/tulu_3_v3.9_unfiltered.jsonl
+checkpoint_dir: "/data/group_data/cx_group/date-models/Llama-3.1-8B"
+out_dir:  /data/group_data/cx_group/date-models/Llama-3.1-8B-tulu3-opt/
+exp_name: test # TODO this param

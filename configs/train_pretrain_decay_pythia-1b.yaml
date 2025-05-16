@@ -1,0 +1,25 @@
+model_name: "pythia-1b"
+data: "OpenWebText" # this is the general format, not just for OpenWebText
+train:
+  save_interval: 200
+  log_interval: 10
+  global_batch_size: 512
+  micro_batch_size: 8
+  max_tokens: 10485760000
+  max_norm: 1.0
+  min_lr: 1.2e-5
+  lr_warmup_steps: 2000
+  tie_embeddings: false
+decay: true
+eval:
+  interval: 50
+optimizer:
+  class_path: "torch.optim.AdamW"
+  init_args:
+    lr: 1.2e-4
+    weight_decay: 0.1
+    betas: [0.9, 0.95]
+tokenizer_dir: "checkpoints/EleutherAI/pythia-1b"
+logger_name: "wandb"
+seed: 1337
+devices: auto # 8 GPUS

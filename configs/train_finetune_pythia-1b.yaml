@@ -1,0 +1,31 @@
+model_name: "pythia-1b"
+# checkpoint_dir: "/data/user_data/cljiao/models/lit_models/pythia-1b"
+checkpoint_dir: "/data/group_data/cx_group/date-models/pythia-1b"
+train:
+  log_interval: 1
+  global_batch_size: 64
+  micro_batch_size: 32
+  lr_warmup_fraction: 0.03
+  max_seq_length: 512
+  epochs: 4
+eval:
+  interval: 100
+  max_iters: 10
+optimizer:
+  class_path: "torch.optim.AdamW"
+  init_args:
+    lr: 2e-4 # TODO lower learning rate than this tp 2e-5
+    weight_decay: 0.
+logger_name: "wandb"
+seed: 1337
+devices: 2 # TODO try auto
+lora:
+  lora_r: 128 # TODO change
+  lora_alpha: 512 # TODO change
+  lora_dropout: 0.05
+  lora_query: True
+  lora_key: False
+  lora_value: True
+  lora_projection: False
+  lora_mlp: False
+  lora_head: False

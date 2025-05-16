@@ -1,0 +1,45 @@
+#!/bin/bash
+#SBATCH --partition=general          
+#SBATCH --job-name=predict_influence
+#SBATCH --gres=gpu:L40S:1              
+#SBATCH --output=logs/predict_influence_%A_%a.out
+#SBATCH --error=logs/predict_influence_%A_%a.err
+#SBATCH --array=0-7
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=50G
+#SBATCH --time=1-00:00:00
+#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --mail-user=emilyx@andrew.cmu.edu
+
+# Description: Runs predict_data_influence.py for 8 shards using SLURM array jobs.
+# Usage:
+# sbatch methods/mates/run_mates_predict.sh <step> <refdata>
+
+# Exit immediately on any error
+set -e
+
+# Check if the required arguments are provided
+if [ "$#" -ne 2 ]; then
+    echo "Usage: sbatch run_mates_predict.sh <step> <refdata>"
+    exit 1
+fi
+
+# Read input parameters
+step=$1
+refdata=$2
+
+# Define parameters
+model_dir="/data/group_data/cx_group/out/pythia-1b/fineweb/sample-350BT/${step}-data_influence_model-${refdata}"
+output_dir="/data/group_data/cx_group/out/pythia-1b/fineweb/sample-350BT/random/step-000${step}/mates_${refdata}"
+select_from_size=1024000
+
+# Get the shard index from the SLURM array task ID
+SHARD=$SLURM_ARRAY_TASK_ID
+
+# Run the script for the current shard
+echo "Processing shard $SHARD with step $step and refdata $refdata"
+CUDA_VISIBLE_DEVICES=0 python methods/mates/predict_data_influence.py \
+    --model_dir $model_dir \
+    --output_dir $output_dir \
+    --select_from_size $select_from_size \
+    --shard $SHARD 8

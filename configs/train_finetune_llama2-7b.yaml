@@ -1,0 +1,30 @@
+model_name: "Llama-2-7b-hf"
+checkpoint_dir: "/data/group_data/cx_group/date-models/Llama-2-7b-hf/meta-llama/Llama-2-7b-hf"
+train:
+  log_interval: 2
+  global_batch_size: 128 
+  micro_batch_size: 1
+  lr_warmup_fraction: 0.03
+  max_seq_length: 2048
+  epochs: 2
+eval:
+  interval: 100
+  max_iters: 10
+optimizer:
+  class_path: "torch.optim.AdamW"
+  init_args:
+    lr: 2e-5
+    weight_decay: 0.
+logger_name: "wandb"
+seed: 1337
+devices: 1
+lora:
+  lora_r: 128
+  lora_alpha: 512
+  lora_dropout: 0.1
+  lora_query: True
+  lora_key: True
+  lora_value: True
+  lora_projection: True
+  lora_mlp: False
+  lora_head: False

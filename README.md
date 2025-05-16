@@ -52,3 +52,36 @@ how to submit to leaderboard:
 https://huggingface.co/spaces/DataAttributionEval/DATE-LM-Leaderboard
 
 ## Citation
+
+## Acknowledgements
+This repository includes components from the following projects:
+```
+@inproceedings{NEURIPS2024_f7326833,
+    author    = {Deng, Junwei and Li, Ting-Wei and Zhang, Shiyuan and Liu, Shixuan and Pan, Yijun and Huang, Hao and Wang, Xinhe and Hu, Pingbang and Zhang, Xingjian and Ma, Jiaqi},
+    booktitle = {Advances in Neural Information Processing Systems},
+    editor    = {A. Globerson and L. Mackey and D. Belgrave and A. Fan and U. Paquet and J. Tomczak and C. Zhang},
+    pages     = {136763--136781},
+    publisher = {Curran Associates, Inc.},
+    title     = {\textbackslash texttt\lbrace dattri\rbrace : A Library for Efficient Data Attribution},
+    url       = {https://proceedings.neurips.cc/paper_files/paper/2024/file/f732683302d91e47610b2416b4977a66-Paper-Datasets_and_Benchmarks_Track.pdf},
+    volume    = {37},
+    year      = {2024}
+}
+
+@misc{ivisondata2025,
+  title={{Large-Scale Data Selection for Instruction Tuning}},
+  author={Hamish Ivison and Muru Zhang and Faeze Brahman and Pang Wei Koh and Pradeep Dasigi},
+  year={2025},
+  eprint={2503.01807},
+  archivePrefix={arXiv},
+  primaryClass={cs.CL},
+  url={https://arxiv.org/abs/2503.01807},
+ }
+
+@inproceedings{yu2024mates,
+   title={MATES: Model-Aware Data Selection for Efficient Pretraining with Data Influence Models},
+   author={Yu, Zichun and Das, Spandan and Xiong, Chenyan},
+   booktitle={NeurIPS},
+   year={2024}
+}
+```

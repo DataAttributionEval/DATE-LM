@@ -1,7 +1,7 @@
 # Data Attribution Evaluation Benchmark
 
 
-## Setup Enviorment
+## Setup Environment
 Install the requirements in `env.yml` and `requirements.txt`:
 ```bash
 conda env create --file env.yml --name myenv

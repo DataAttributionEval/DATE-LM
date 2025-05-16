@@ -14,10 +14,19 @@
 # Usage:
 # cd data-attribution-evaluation
 # conda activate myenv
-# sbatch methods/gradsim/probe_gradsim_lambada_array.sh
+# sbatch methods/gradsim/probe_gradsim_lambada_array.sh /data/group_data/cx_group
 
 # Exit immediately on any error
 set -ex
+
+# Check if base_dir is provided as an argument
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <base_dir>"
+    exit 1
+fi
+
+# Define the base directory from the argument
+base_dir=$1
 
 # Define the step and shard rank
 STEP="step-00030000"
@@ -27,10 +36,10 @@ RANK=$SLURM_ARRAY_TASK_ID
 echo "Processing shard $RANK"
 CUDA_VISIBLE_DEVICES=0 PYTHONUNBUFFERED=1 python methods/gradsim/probe_gradient_similarity.py \
     --model_name pythia-1b \
-    --train_data_dir /data/group_data/cx_group/data/fineweb/train/0 \
-    --reference_data_dir /data/group_data/cx_group/data/lambada_openai/train-1024.pt  \
+    --train_data_dir $base_dir/data/fineweb/train/0 \
+    --reference_data_dir $base_dir/data/lambada_openai/train/train-1024.pt  \
     --reference_data_size 1024 \
-    --resume /data/group_data/cx_group/out/pythia-1b/fineweb/sample-350BT/random/${STEP}/lit_model.pth \
-    --out_dir /data/group_data/cx_group/out/pythia-1b/fineweb/sample-350BT/random/${STEP}/gradsim_lambada_preempt \
+    --resume $base_dir/out/pythia-1b/fineweb/sample-350BT/random/${STEP}/lit_model.pth \
+    --out_dir $base_dir/out/pythia-1b/fineweb/sample-350BT/random/${STEP}/gradsim_lambada \
     --rank $RANK \
     --devices 1

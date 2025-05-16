@@ -146,8 +146,6 @@ def convert_and_evaluate(
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--config", type=str, help="Path to the configuration file")
-    
-    args = parser.parse_args()
-    config = OmegaConf.load(args.config)
+    torch.set_float32_matmul_precision("high")
+    from jsonargparse import CLI
+    CLI(convert_and_evaluate)

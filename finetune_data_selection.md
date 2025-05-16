@@ -1,16 +1,16 @@
 
 # Finetune data slection
 
-## step 1 Data Processing
+## Step 1: Prepare datasets and models
 download data:
 ```
 bash data_processing/download_finetune_train_data.sh
 bash data_processing/download_finetune_eval_data.sh
 ```
 download model:
-`litgpt download meta-llama/Llama-3.1-8B your_out_dir`
+`litgpt download meta-llama/Llama-3.1-8B your_dir`
 
-## step 2 score data
+## Step 2: Run Data Scoring (skip for random selection)
 to run baseline methods, we provide scripts in methods folder.
 to run a custom method, create python script following this template:
 ```

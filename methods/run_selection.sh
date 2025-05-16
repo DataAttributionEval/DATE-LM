@@ -11,8 +11,6 @@ fi
 # Read method from config
 config_path="$1"
 echo "config_path: $config_path"
-method=$(yq .method "$config_path" | tr -d '"')
-echo "method: $method"
 
 # for now, this takes the score for each datapoint, and select the topk with a diversity metric
 python methods/select_data.py --config "$config_path"

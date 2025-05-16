@@ -77,7 +77,7 @@ def setup(
         val_dataset = val_dataset[:reference_data_size]
     val_dataloader = DataLoader(
         val_dataset,
-        batch_size=4, # TODO this was 16 for lamabada
+        batch_size=16, # TODO 16 for lamabada, 4 for FLAN
         collate_fn=lambda batch: {
             "input_ids": pad_sequence([torch.tensor(sample["input_ids"]) for sample in batch], batch_first=True),
             "labels": pad_sequence([torch.tensor(sample["labels"]) for sample in batch], batch_first=True, padding_value=-1),

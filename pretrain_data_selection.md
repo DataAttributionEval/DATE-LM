@@ -1,10 +1,10 @@
 
 # Training Data Selection
-The pipeline consists of four main steps: data processing, data selection, pretraining, and evaluation. 
-Given a unified config file like [configs/demo.yaml](configs/demo.yaml)
+
+Example config: [configs/demo.yaml](configs/demo.yaml)
 ```yaml
 # data preprocessing
-train_dataset_name: fineweb
+train_dataset_name: fineweb 
 reference_dataset_name: lambada
 
 ## data selection
@@ -17,9 +17,9 @@ selection_size: 102400
 model_class: pythia
 train_config: configs/pretrain_decay_pythia-1b.yaml
 ```
-It runs the following steps
+
 ### Step 1: Data Processing
-tokenize and process training data and reference data (we currently support Fineweb as train dataset, and LAMBADA or FLAN as reference datasets)
+tokenize and process training data and reference data
 
 ```sbatch data_processing/run_preprocess.sh $config_path```
 

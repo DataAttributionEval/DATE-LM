@@ -34,4 +34,3 @@ CUDA_VISIBLE_DEVICES=0 python -m methods.gradsim.probe_gradient_similarity_instr
       --val_dataset_name ${VAL_DATASET} \
       --val_num_samples -1
 
-### test

@@ -1,5 +1,5 @@
 # <img src="assets/logo.png" alt="DATE-LM Logo" width="30">  DATE-LM: Data Attribution Evaluation Benchmark
-**DATE-LM ** is a benchmark suite designed for evaluating data attribution methods in real-world applications of large language models (LLMs).
+**DATE-LM** is a benchmark suite designed for evaluating data attribution methods in real-world applications of large language models (LLMs).
 
 
 [![Hugging Face Organization](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-DataAttributionEval-blue?style=flat-square&labelColor=gray)](https://huggingface.co/DataAttributionEval)

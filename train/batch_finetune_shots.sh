@@ -9,7 +9,7 @@
 #SBATCH --array=0-2  # Array job for 3 tasks: mmlu, gsm8k, bbh
 
 # usage:
-# (mmft) [@babel-15-20 data-attribution-evaluation]$ sbatch train/batch_finetune_shots.sh --method gradsim_hf
+# sbatch train/batch_finetune_shots.sh --method gradsim_hf --base_dir /path/to/base
 
 set -ex
 
@@ -19,6 +19,7 @@ export NCCL_P2P_DISABLE=1
 while [[ "$#" -gt 0 ]]; do
     case $1 in
         --method) METHOD="$2"; shift ;;
+        --base_dir) BASE_DIR="$2"; shift ;;
         *) echo "Unknown parameter passed: $1"; exit 1 ;;
     esac
     shift
@@ -29,12 +30,17 @@ if [ -z "$METHOD" ]; then
     exit 1
 fi
 
+if [ -z "$BASE_DIR" ]; then
+    echo "Error: --base_dir flag is required (e.g., /path/to/base)"
+    exit 1
+fi
+
 # Define tasks and corresponding metric paths
 TASKS=("mmlu_shots" "gsm8k_shots" "bbh_shots")
 METRIC_PATHS=(
-    "/data/user_data/emilyx/scores/mmlu_shots_${METHOD}.npy"
-    "/data/user_data/emilyx/scores/gsm8k_shots_${METHOD}.npy"
-    "/data/user_data/emilyx/scores/bbh_shots_${METHOD}.npy"
+    "${BASE_DIR}/scores/mmlu_shots_${METHOD}.npy"
+    "${BASE_DIR}/scores/gsm8k_shots_${METHOD}.npy"
+    "${BASE_DIR}/scores/bbh_shots_${METHOD}.npy"
 )
 
 # Get the current task and metric path based on SLURM_ARRAY_TASK_ID
@@ -43,19 +49,14 @@ METRIC_PATH=${METRIC_PATHS[$SLURM_ARRAY_TASK_ID]}
 
 # Define parameters
 train_config="configs/train_finetune_llama3-8b.yaml"
-train_data_path="/data/hf_cache/datasets/lsds_data/data/training_data/training_data/tulu_3_v3.9_unfiltered.jsonl"
-checkpoint_dir="/data/group_data/cx_group/date-models/Llama-3.1-8B"
-out_dir="/data/group_data/cx_group/date-models/Llama-3.1-8B-tulu3-${METHOD}-${TASK}/"
+train_data_path="${BASE_DIR}/lsds_data/data/training_data/training_data/tulu_3_v3.9_unfiltered.jsonl"
+checkpoint_dir="${BASE_DIR}/date-models/Llama-3.1-8B"
+out_dir="${BASE_DIR}/date-models/Llama-3.1-8B-tulu3-${METHOD}-${TASK}/"
 
 echo "Running finetuning for task: $TASK with method: $METHOD"
 echo "Metric Path: $METRIC_PATH"
 echo "Output Directory: $out_dir"
 
-# Run the finetune script
-# Check if the final output directory already exists
-# if [ -d "$out_dir/final" ]; then
-#     echo "Output directory $out_dir/final already exists. Skipping finetuning for task: $TASK"
-# else
 # Run the finetune script
 python train/finetune.py \
     --config $train_config \
@@ -68,10 +69,9 @@ echo "Finetuning completed for task: $TASK"
 # Convert the checkpoint to HuggingFace format
 python evaluation/convert.py $out_dir/final
 echo "Checkpoint converted to HuggingFace format for task: $TASK"
-# fi
 
 # Run evaluation based on the task
-data_base_dir="/data/hf_cache/datasets/lsds_data/data"
+data_base_dir="${BASE_DIR}/lsds_data/data"
 MODEL_PATH=$out_dir/final
 
 if [ "$TASK" == "mmlu_shots" ]; then

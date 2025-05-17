@@ -20,6 +20,14 @@ To define a custom scoring function, you can copy `probe_gradient_similarity_ins
 
 
 ## Step 3: Selection, Training and Evaluation
+batch run selection, training, and evaluation of all three tasks: MMLU, gsm8k, bbh:
+```
+sbatch train/batch_finetune_shots.sh --method gradsim --base_dir [your_base_dir]
+```
+substitute gradsim with the method corresponding to directory of your output scores from step2. 
+
+As a sanity check, you can also test a random selection run with:
+
 ```
 bash train/run_finetune.sh configs/finetune_llama3-8b-tulu3.yaml
 ```

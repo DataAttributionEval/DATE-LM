@@ -1,26 +1,41 @@
 # <img src="assets/logo.png" alt="DATE-LM Logo" width="30">  DATE-LM: Data Attribution Evaluation Benchmark
-**DATE-LM** is a benchmark suite designed for evaluating data attribution methods in real-world applications of large language models (LLMs).
-
 
 [![Hugging Face Organization](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-DataAttributionEval-blue?style=flat-square&labelColor=gray)](https://huggingface.co/DataAttributionEval)
 
+
+**DATE-LM** is a benchmark suite designed for evaluating data attribution methods on real-world applications for large language models (LLMs), created by researchers from Carnegie Mellon University, University of Illinois at Urbana-champaign, and University of Michigan.
+- 📄 [DATE-LM Paper](https://arxiv.org/abs/2507.09424)
+- 🏆 [DATE-LM Leaderboard](https://huggingface.co/spaces/DataAttributionEval/DATE-LM-Leaderboard)
+
+## Quick Links
+
+- [1. Overview](#1-overview)
+- [2. Environment Setup](#2-environment-setup)
+- [3. Evaluation workflow](#3-evaluation-workflow)
+  - [Pre-train Data Selection](pretrain_data_selection.md)
+  - [Fine-tuning](finetune_data_selection.md)
+  - [Toxicity/Bias Filtering](Applications.md)
+  - [Factual Attribution](Applications.md)
+- [4. Leaderboard](#4-leaderboard)
+
+## 1. Overview
+
 ![Overview](assets/overview.png)
 
+Our evaluation framework contains:
+- 🧩 Modular pipeline supporting attribution scoring, subset selection, and task evaluation
+- 🔌 Plug-and-play support for new attribution methods
+- 📈 Pre-trained and fine-tuned model checkpoints for reproducibility and efficiency
+- 🏆 Public leaderboard for standardized benchmarking and community engagement
 
-## Key Features
-
-- **Three Core Evaluation Tasks**:
-  - Training Data Selection (pre-training and fine-tuning)
-  - Toxicity/Bias Filtering
-  - Factual Attribution
-- Modular pipeline supporting attribution scoring, subset selection, and task evaluation
-- Plug-and-play support for new attribution methods
-- Pre-trained and fine-tuned model checkpoints for reproducibility and efficiency
-- Public leaderboard for standardized benchmarking and community engagement
+We support **three core evaluation tasks**:
+- Training Data Selection: pre-training and SFT
+- Toxicity/Bias Filtering
+- Factual Attribution
 
 ---
 
-## Environment Setup
+## 2. Environment Setup
 
 Install the required dependencies using the files `env.yml` and `requirements.txt`:
 
@@ -30,7 +45,7 @@ conda activate myenv
 pip install -r requirements.txt
 ```
 
-## Evaluation workflow
+## 3. Evaluation workflow
 The evaluation process consists of the following steps:
 
 1. **Download Datasets and Models**: Choose a task and follow the preparation steps to download datasets and models.  
@@ -46,12 +61,22 @@ Detailed steps and tutorials are available in the following documentation files:
 - **[Toxicity/Bias Filtering](Applications.md)**
 - **[Factual Attribution](Applications.md)**
 
-
-## Leaderboard
-how to submit to leaderboard: 
+## 4. Leaderboard
+Please see the link below for instructions to submit to the leaderboard: 
 https://huggingface.co/spaces/DataAttributionEval/DATE-LM-Leaderboard
 
 ## Citation
+Please use this citation to reference our work
+
+```
+@inproceedings{2025datelm,
+  title={DATE-LM: Benchmarking Data Attribution Evaluation for Large Language Models}, 
+  author={Cathy Jiao and Yijun Pan and Emily Xiao and Daisy Sheng and Niket Jain and Hanzhang Zhao and Ishita Dasgupta and Jiaqi W. Ma and Chenyan Xiong},
+  year={2025},
+  booktitle={NeurIPS},
+  url={https://arxiv.org/abs/2507.09424}, 
+}
+```
 
 ## Acknowledgements
 This repository includes components from the following projects:

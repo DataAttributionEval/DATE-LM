@@ -1,4 +1,4 @@
-# <img src="assets/logo.png" alt="DATE-LM Logo" width="30">  DATE-LM: Data Attribution Evaluation Benchmark
+# <img src="assets/mascot.png" alt="DATE-LM Logo" width="30">  DATE-LM: Data Attribution Evaluation Benchmark
 
 [![Hugging Face Organization](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-DataAttributionEval-blue?style=flat-square&labelColor=gray)](https://huggingface.co/DataAttributionEval)
 
